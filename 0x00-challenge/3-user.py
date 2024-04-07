@@ -1,29 +1,29 @@
-import hashlib
+import hashli
 import uuid
 
 class User():
-    _hashed_password = None
+    _password = None
 
     def __init__(self):
         self.id = str(uuid.uuid4())
 
     @property
     def password(self):
-        return self._hashed_password
+        return self._password
 
     @password.setter
     def password(self, pwd):
         if pwd is None or not isinstance(pwd, str):
-            self._hashed_password = None
+            self._password = None
         else:
-            self._hashed_password = hashlib.sha256(pwd.encode()).hexdigest().lower()
+            self._password = hashlib.sha256(pwd.encode()).hexdigest().lower()
 
     def is_valid_password(self, pwd):
         if pwd is None or not isinstance(pwd, str):
             return False
-        if self._hashed_password is None:
+        if self._password is None:
             return False
-        return hashlib.sha256(pwd.encode()).hexdigest().lower() == self._hashed_password
+        return hashlib.sha256(pwd.encode()).hexdigest().lower() == self._password
 
 if __name__ == '__main__':
     print("Test User")
